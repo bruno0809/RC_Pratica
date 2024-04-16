@@ -4,14 +4,12 @@ import json
 import subprocess
 
 
-HDS_URL = "http://localhost:8000/hds_stream"
-DOWNLOAD_CMD = ['wget', HDS_URL]
-MEDIAINFO_CMD = [ 'mediainfo', '--Output=JSON', HDS_URL]
+DOWNLOAD_CMD = ['wget', '-O', 'streamed.mp4', get_url('HDS')]
+MEDIAINFO_CMD = [ 'mediainfo', '--Output=JSON', 'streamed.mp4']
 
 
 if __name__ == '__main__':
-    # subprocess.run(DOWNLOAD_CMD)
-
+    subprocess.run(DOWNLOAD_CMD)
     mediainfo_output = subprocess.check_output(MEDIAINFO_CMD)
     json_output = json.loads(mediainfo_output)
     
